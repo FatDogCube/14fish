@@ -1,16 +1,23 @@
+import threading
 import time
+from time import sleep
 import cv2 as cv
 import numpy as np
 from PIL import ImageGrab
-from time import sleep
+
 import controller
-import threading
 
 template = cv.imread('!!.png', 0)
 w, h = template.shape[::-1]
 roi = (1080, 480, 1480, 880)
 starttime = time.time()
 found_fish = False
+
+cast = controller.right_trigger.btn_a
+hook = controller.right_trigger.btn_b
+chum = controller.right_trigger.btn_x
+t_favour = controller.right_trigger.btn_y
+triple_hook = controller.right_trigger.btn_down
 
 
 def match(img_rgb):
@@ -26,7 +33,6 @@ def match(img_rgb):
 
     if cv.waitKey(1) & 0xFF == ord('q'):
         cv.destroyAllWindows()
-        controller.reset()
         exit(0)
     return found
 
@@ -37,12 +43,12 @@ def catch_fish():
     while True:
         if found_fish:
             # controller.triple_hook()
-            controller.hook()
+            hook()
             sleep(8)
             print("catch done")
-            controller.chum()
-            controller.thaliaks_favour()
-            controller.cast()
+            chum()
+            t_favour()
+            cast()
             starttime = time.time()
             found_fish = False
 
