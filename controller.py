@@ -1,5 +1,6 @@
-import vgamepad as vg
 from time import sleep
+
+import vgamepad as vg
 
 gamepad = vg.VX360Gamepad()
 
@@ -39,16 +40,25 @@ def _reset():
     sleep(1)
 
 
+def button(button):
+    gamepad.press_button(button)
+    gamepad.update()
+    sleep(0.05)
+    gamepad.release_button(button)
+    gamepad.update()
+    sleep(0.05)
+
+
 def _rt_button(button):
     gamepad.right_trigger(value=255)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.1)
     gamepad.press_button(button)
     gamepad.update()
     sleep(0.3)
     gamepad.right_trigger(value=0)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.1)
     gamepad.release_button(button)
     gamepad.update()
     sleep(0.3)
@@ -57,13 +67,13 @@ def _rt_button(button):
 def _lt_button(button):
     gamepad.left_trigger(value=255)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.1)
     gamepad.press_button(button)
     gamepad.update()
     sleep(0.3)
     gamepad.left_trigger(value=0)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.1)
     gamepad.release_button(button)
     gamepad.update()
     sleep(0.3)
@@ -71,4 +81,3 @@ def _lt_button(button):
 
 left_trigger = Trigger(_lt_button)
 right_trigger = Trigger(_rt_button)
-
