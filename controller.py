@@ -34,10 +34,10 @@ class Trigger:
         self.trigger(0x0008)
 
 
-def _reset():
+def reset():
     gamepad.reset()
     gamepad.update()
-    sleep(1)
+    sleep(0.1)
 
 
 def button(button):
@@ -52,16 +52,16 @@ def button(button):
 def _rt_button(button):
     gamepad.right_trigger(value=255)
     gamepad.update()
-    sleep(0.1)
+    sleep(0.25)
     gamepad.press_button(button)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.25)
     gamepad.right_trigger(value=0)
     gamepad.update()
     sleep(0.1)
     gamepad.release_button(button)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.25)
 
 
 def _lt_button(button):
@@ -70,13 +70,13 @@ def _lt_button(button):
     sleep(0.1)
     gamepad.press_button(button)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.25)
     gamepad.left_trigger(value=0)
     gamepad.update()
     sleep(0.1)
     gamepad.release_button(button)
     gamepad.update()
-    sleep(0.3)
+    sleep(0.25)
 
 
 left_trigger = Trigger(_lt_button)
